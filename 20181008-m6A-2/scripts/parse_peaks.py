@@ -125,22 +125,23 @@ def RPKM_test_new(ratio, input_readcounts, peak_to_gene, gene_dict, peak_df):
 		intensity must be called as having peak.
 	'''
 	group_comparisons = {
-		'KI_age': [
-			['P1_NKI_1', 'P1_NKI_2', 'P1_NKI_3', 'P1_NKI_4','P1_NKI_5','P1_NKI_6','P1_NKI_7','P1_NKI_8','P1_NKI_9','P1_NKI_10','P1_NKI_11','P1_NKI_12',],
-			['M_KI_01', 'M_KI_02', 'M_KI_03', 'M_KI_04', 'M_KI_05','F_KI_06', 'F_KI_07', 'F_KI_08', 'F_KI_09', 'F_KI_10',]
-		],
 		'V_age': [
 			['NH_1','NH_2','NH_3','NH_4','NH_5','NH_6','NH_7','NH_8','NH_9','NH_10','NH_11','NH_12',],
 			['LV_01', 'LV_02', 'LV_03', 'LV_04', 'LV_05', 'LV_06', 'LV_07', 'LV_08','LV_09','LV_10', 'RV_01', 'RV_02', 'RV_03', 'RV_04', 'RV_05', 'RV_06', 'RV_07', 'RV_08','RV_09','RV_10',]
 		],
-		'adult_KI_V': [
-			['M_KI_01', 'M_KI_02', 'M_KI_03', 'M_KI_04', 'M_KI_05','F_KI_06', 'F_KI_07', 'F_KI_08', 'F_KI_09', 'F_KI_10',],
-			['LV_01', 'LV_02', 'LV_03', 'LV_04', 'LV_05', 'LV_06', 'LV_07', 'LV_08','LV_09','LV_10', 'RV_01', 'RV_02', 'RV_03', 'RV_04', 'RV_05', 'RV_06', 'RV_07', 'RV_08','RV_09','RV_10',]
-		],
-		'neonatal_KI_V': [
-			['P1_NKI_1', 'P1_NKI_2', 'P1_NKI_3', 'P1_NKI_4','P1_NKI_5','P1_NKI_6','P1_NKI_7','P1_NKI_8','P1_NKI_9','P1_NKI_10','P1_NKI_11','P1_NKI_12',],
-			['NH_1','NH_2','NH_3','NH_4','NH_5','NH_6','NH_7','NH_8','NH_9','NH_10','NH_11','NH_12',],
-		],
+		#'KI_age': [
+		#	['P1_NKI_1', 'P1_NKI_2', 'P1_NKI_3', 'P1_NKI_4','P1_NKI_5','P1_NKI_6','P1_NKI_7','P1_NKI_8','P1_NKI_9','P1_NKI_10','P1_NKI_11','P1_NKI_12',],
+		#	['M_KI_01', 'M_KI_02', 'M_KI_03', 'M_KI_04', 'M_KI_05','F_KI_06', 'F_KI_07', 'F_KI_08', 'F_KI_09', 'F_KI_10',]
+		#],
+
+		#'adult_KI_V': [
+		#	['M_KI_01', 'M_KI_02', 'M_KI_03', 'M_KI_04', 'M_KI_05','F_KI_06', 'F_KI_07', 'F_KI_08', 'F_KI_09', 'F_KI_10',],
+		#	['LV_01', 'LV_02', 'LV_03', 'LV_04', 'LV_05', 'LV_06', 'LV_07', 'LV_08','LV_09','LV_10', 'RV_01', 'RV_02', 'RV_03', 'RV_04', 'RV_05', 'RV_06', 'RV_07', 'RV_08','RV_09','RV_10',]
+		#],
+		#'neonatal_KI_V': [
+		#	['P1_NKI_1', 'P1_NKI_2', 'P1_NKI_3', 'P1_NKI_4','P1_NKI_5','P1_NKI_6','P1_NKI_7','P1_NKI_8','P1_NKI_9','P1_NKI_10','P1_NKI_11','P1_NKI_12',],
+		#	['NH_1','NH_2','NH_3','NH_4','NH_5','NH_6','NH_7','NH_8','NH_9','NH_10','NH_11','NH_12',],
+		#],
 
 	}
 
@@ -156,8 +157,8 @@ def RPKM_test_new(ratio, input_readcounts, peak_to_gene, gene_dict, peak_df):
 			a_ratio = ratio.loc[peak, a]
 			b_ratio = ratio.loc[peak, b]
 			## 4) The maximum peak intensity of all samples >= 2; 
-			if not (max(np.concatenate([a_ratio.values, b_ratio.values]))>=2):
-				continue
+			#if not (max(np.concatenate([a_ratio.values, b_ratio.values]))>=2):
+			#	continue
 
 			# fold change between groups
 			log_a_fc = np.log(a_ratio) - np.mean(np.log(b_ratio))
@@ -169,52 +170,68 @@ def RPKM_test_new(ratio, input_readcounts, peak_to_gene, gene_dict, peak_df):
 			##	intensities in both replicates in the same direction; 
 			#if min(log_a_fc) < 0 < max(log_a_fc) or min(log_b_fc) < 0 < max(log_b_fc):  # check if all the same sign
 			#	continue												# by whether list stradles zero
-			if not abs_avg_fc > 1.5:
-				continue
+			#if not abs_avg_fc > 1.5:
+			#	continue
 
 			## 2) Input window RPKM >= 10 in all 4 samples; 
 			a_input_win = input_readcounts.loc[peak, a]
 			b_input_win = input_readcounts.loc[peak, b]
-			if not ( all(a_input_win>=10) and all(b_input_win>=10) ):
-				continue
+			#if not ( all(a_input_win>=10) and all(b_input_win>=10) ):
+			#	continue
 
 			# gene expression
 			target_gene = peak_to_gene[peak]
 			a_geneexp = np.array([ gene_dict[sam+'_Input'][target_gene] for sam in a ])
 			b_geneexp = np.array([ gene_dict[sam+'_Input'][target_gene] for sam in b ])
+			
 			## 1) Input gene FPKM >= 1 in all 4 samples;
-			if not all(a_geneexp)>=1 and not all(b_geneexp)>=1:
-				continue
+			#if not all(a_geneexp)>=1 and not all(b_geneexp)>=1:
+			#	continue
+			
 			## 	5) In each replicate, the sample with higher peak 
 			## intensity must be called as having peak.
 			#if all(np.isnan(peak_df.loc[peak, a])) and all(np.isnan(peak_df.loc[peak, b])):
-			if avg_fc > 1. and sum(np.isnan(peak_df.loc[peak, a])) > len(a) - 2:
-				continue
-			if avg_fc < 1. and sum(np.isnan(peak_df.loc[peak, b])) > len(b) - 2:
-				continue
+			#if avg_fc > 1. and sum(np.isnan(peak_df.loc[peak, a])) > len(a) - 2:
+			#	continue
+			#if avg_fc < 1. and sum(np.isnan(peak_df.loc[peak, b])) > len(b) - 2:
+			#	continue
 
 			## 6) wilcoxon & t-test must be significant
-			pv1 = ss.mannwhitneyu(a_ratio, b_ratio).pvalue
-			if pv1>0.05:
-				continue
-			pv2 = ss.ttest_ind(a_ratio, b_ratio).pvalue
-			if pv2>0.05:
-				continue
+			try:
+				pv1 = ss.mannwhitneyu(a_ratio, b_ratio).pvalue
+			except:
+				pv1 = 1.
+			#if pv1>0.05:
+			#	continue
+			try:
+				pv2 = ss.ttest_ind(a_ratio, b_ratio).pvalue
+			except:
+				pv2 = 1.
+			#if pv2>0.05:
+			#	continue
 			foldchange = math.log(np.mean(a_ratio)/np.mean(b_ratio), 1.5)
 			chrom, start, end = peak.split(':')
 			new_peak = '{}:{}-{}'.format(chrom, start, end)
 			this_res = this_res.append(
 				{
 					'peak': new_peak, 
+					'target_gene': target_gene,
 					'group1':','.join([str(round(x,2)) for x in a_ratio]),
 					'group2':','.join([str(round(x,2)) for x in b_ratio]),
 					'log1.5_fc': foldchange,
 					't_pval': pv2,
-					'wilcox_pval': pv1 
+					'wilcox_pval': pv1,
+					'group1_inputWinRPKM': ','.join([str(round(x,2)) for x in a_input_win]),
+					'group2_inputWinRPKM': ','.join([str(round(x,2)) for x in b_input_win]),
+					'group1_geneExp': ','.join([str(round(x,2)) for x in a_geneexp]), 
+					'group2_geneExp': ','.join([str(round(x,2)) for x in b_geneexp]), 
+					'group1_numPeaks': sum(np.isnan(peak_df.loc[peak, a])),
+					'group2_numPeaks': sum(np.isnan(peak_df.loc[peak, b])),
+
 				}, 
 				ignore_index=True)
 			res.loc[peak, comparison] = foldchange
-		this_res.to_csv("{}.DiffPeak.tsv".format(comparison), sep="\t")
+		this_res.to_csv("_data/DiffPeaks_tsv/{}.DiffPeak.tsv".format(comparison), sep="\t")
 	new_index=[]
 	url=[]
 	url_template='=HYPERLINK("https://genome.ucsc.edu/cgi-bin/hgTracks?db=mm10&position={0}","{0}")'

@@ -81,3 +81,44 @@ python2 scripts/make.Revigo.Input.py plots/GO_result_table_NKtop1000.NK_allExpre
 python2 scripts/make.Revigo.Input.py plots/GO_result_table_NKtop2000.NK_allExpressed.txt > Revigo/RevGO.NK_top2000.txt
 
 Rscript scripts/REVIGO_plot_read_data_2.r Revigo/NK_top1000.csv Revigo2/NK_2.pdf
+
+
+
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_BP/HeartAge_BP.csv Revigo_BP/HeartAge.pdf
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_BP/KidneyAge_BP.csv Revigo_BP/KidneyAge.pdf
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_BP/AHK_BP.csv Revigo_BP/AHK.pdf
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_BP/NHK_BP.csv Revigo_BP/NHK.pdf
+
+
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_BP/NK_top1000_BP.csv Revigo_BP/NK.pdf
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_BP/NH_top1000_BP.csv Revigo_BP/NH.pdf
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_BP/AK_top1000_BP.csv Revigo_BP/AK.pdf
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_BP/AH_top1000_BP.csv Revigo_BP/AH.pdf
+
+
+### Added 2018.12.17
+Rscript scripts/GO_plot.R _data/mGene.NH_uniq.txt _data/mGene.NHAH_background.txt plots_2/ NH_uniq
+Rscript scripts/GO_plot.R _data/mGene.AH_uniq.txt _data/mGene.NHAH_background.txt plots_2/ AH_uniq
+Rscript scripts/GO_plot.R _data/mGene.NHAH_common.txt _data/mGene.NHAH_background.txt plots_2/ AHNH_common
+
+python2 scripts/make.Revigo.Input.py plots_2/GO_result_table_NH_uniq.txt > Revigo_mGene/RevGO.NH_uniq.txt
+python2 scripts/make.Revigo.Input.py plots_2/GO_result_table_AH_uniq.txt > Revigo_mGene/RevGO.AH_uniq.txt
+python2 scripts/make.Revigo.Input.py plots_2/GO_result_table_AHNH_common.txt > Revigo_mGene/RevGO.AHNH_common.txt
+
+
+Rscript scripts/GO_plot.R _data/mGene.NK_uniq.txt _data/mGene.NKAK_background.txt plots_2/ NK_uniq
+Rscript scripts/GO_plot.R _data/mGene.AK_uniq.txt _data/mGene.NKAK_background.txt plots_2/ AK_uniq
+Rscript scripts/GO_plot.R _data/mGene.NKAK_common.txt _data/mGene.NKAK_background.txt plots_2/ AKNK_common
+
+python2 scripts/make.Revigo.Input.py plots_2/GO_result_table_NK_uniq.txt > Revigo_mGene/RevGO.NK_uniq.txt
+python2 scripts/make.Revigo.Input.py plots_2/GO_result_table_AK_uniq.txt > Revigo_mGene/RevGO.AK_uniq.txt
+python2 scripts/make.Revigo.Input.py plots_2/GO_result_table_AKNK_common.txt > Revigo_mGene/RevGO.AKNK_common.txt
+
+
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_mGene/AH_uniq.csv Revigo_mGene/AH_uniq.pdf
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_mGene/NH_uniq.top1000.csv Revigo_mGene/NH_uniq.pdf
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_mGene/AHNH_common.csv Revigo_mGene/AHNH_common.pdf
+
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_mGene/AK_uniq.csv Revigo_mGene/AK_uniq.pdf
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_mGene/NK_uniq.csv Revigo_mGene/NK_uniq.pdf
+Rscript scripts/REVIGO_plot_read_data_2.r Revigo_mGene/AKNK_common.csv Revigo_mGene/AKNK_common.pdf
