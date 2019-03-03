@@ -10,8 +10,8 @@ plot_fn=args[2]
 
 data = read.table(data_fn)
 tot = nrow(data)
-sep1 = tot/3
-sep2 = tot/3*2
+sep1 = tot/3+1
+sep2 = tot/3*2+1
 
 # if(length(grep('png', plot_fn))>0) {
 	# png(plot_fn, width=1000, height=500)
@@ -33,7 +33,7 @@ p = ggplot(data, aes(x=coord, y=Peak_Tx_WithPeak, fill=NumPeak, colour=NumPeak))
 	guides(fill=F, colour=F) +
 	theme_bw() +
 	geom_vline(xintercept=c(sep1, sep2), linetype='dashed') +
-	annotate('text', label=c("5'UTR", "CDS", "3'UTR"), 
+	annotate('text', label=c("3'UTR", "CDS", "5'UTR"), 
 		x=c( sep1/2, (sep1+sep2)/2, sep2+sep1/2 ), y=max(data[,2])*0.9)
 
 ggsave(file=plot_fn, plot=p, width=10, height=5, units='in')  # NOT WORKING in the Anaconda R. ZZJ 8.11.2018
